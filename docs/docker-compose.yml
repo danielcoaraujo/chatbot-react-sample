@@ -1,0 +1,25 @@
+version: '2.1'
+
+services:
+
+  chatbotfrontend:
+    container_name: chatbot-frontend
+    image: dadhx05.interno:9091/oidigital/chatbot-frontend:latest
+    ports:
+      - 8611:80
+    mem_limit: 32m
+    # volumes:
+    #   - /oidigital/chatbot-frontend/logs:/oidigital/chatbot-frontend/logs
+    # depends_on:
+    #   - chatbot
+
+  chatbot:
+    container_name: chatbot
+    image: dadhx05.interno:9091/oidigital/chatbot:snapshot
+    ports:
+      - 8080:8080
+    mem_limit: 1024m
+    environment:
+      - LINK_BACKEND=http://digdx01.interno:8080/chatbot
+    # volumes:
+    #   - /oidigital/chatbot/logs:/oidigital/chatbot/logs

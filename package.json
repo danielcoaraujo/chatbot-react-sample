@@ -1,0 +1,27 @@
+{
+  "name": "chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "material-design-icons": "^3.0.1",
+    "material-ui": "^1.0.0-beta.10",
+    "material-ui-icons": "^1.0.0-beta.5",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
+    "pubsub-js": "^1.5.7",
+    "react": "^15.6.1",
+    "react-async-script": "^0.9.1",
+    "react-dom": "^15.6.1",
+    "react-google-recaptcha": "^0.9.7",
+    "react-moment": "^0.6.5",
+    "react-scripts": "1.0.13",
+    "reactjs-localstorage": "0.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

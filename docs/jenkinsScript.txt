@@ -1,0 +1,32 @@
+node('master'){
+    stage ('Checkout'){
+        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8e382c09-26f7-4095-b40e-0eb49bceeb11', url: 'git@dadhx01:arquitetura-digital/chatbot-frontend.git']]]
+    }
+    
+    stage ('NPM Install'){
+        sh 'sudo npm install'
+    }
+    
+    stage ('NPM Build'){
+        sh 'sudo npm run build'
+    }
+    
+    stage ('Build docker image'){
+        sh 'sudo docker build -t dadhx05.interno:9091/oidigital/chatbot-frontend .'
+    }
+    
+    stage('Push docker image to nexus'){
+        sh 'sudo docker push dadhx05.interno:9091/oidigital/chatbot-frontend:latest'
+    }
+    
+    stage('Deploy'){
+        sh script: """
+            ssh -tT arqdigus@digdx01 bash -c "'
+            cd chatbot
+            sudo /usr/local/bin/docker-compose pull chatbotfrontend
+            sudo /usr/local/bin/docker-compose scale chatbotfrontend=0
+            sudo /usr/local/bin/docker-compose scale chatbotfrontend=1
+            '"
+        """, returnStdout: true
+    }
+}
