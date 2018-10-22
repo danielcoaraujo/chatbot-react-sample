@@ -1,6 +1,6 @@
 node('master'){
     stage ('Checkout'){
-        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8e382c09-26f7-4095-b40e-0eb49bceeb11', url: 'git@dadhx01:arquitetura-digital/chatbot-frontend.git']]]
+        doCheckout()
     }
     
     stage ('NPM Install'){
